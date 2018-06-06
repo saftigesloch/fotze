@@ -1,4 +1,3 @@
-var handler = require('express')();
 var server  = require('http').createServer(handler)
 var io = require('socket.io')(server);
 var fs = require('fs');
