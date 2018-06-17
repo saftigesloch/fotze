@@ -1,6 +1,6 @@
 {
   "name": "fotze",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "bla",
   "main": "app.js",
   "scripts": {
@@ -10,6 +10,8 @@
   "author": "Loch, Saftiges",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.15.2",
+    "moment": "^2.22.2",
     "socket.io": "^2.1.1"
   }
 }
