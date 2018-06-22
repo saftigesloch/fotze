@@ -26,7 +26,7 @@ function handler(req, res) {
 }
 
 
-io.on('connection', function (socket) {
+io.on('connection', function (socket, username) {
 
         
         console.log("--# client connected:", new Date());
@@ -37,8 +37,13 @@ io.on('connection', function (socket) {
             console.log("  # dev. --> " + msg);
         });
 
+        socket.on('cunt', function(username) {
+            socket.username = username;
+        });
+    
         socket.on('chat message', function (msg) {
-            console.log('message: ' + msg);
+            console.log(socket.username + 'message: ' + msg);
+            io.emit('cunt', socket.username);
             io.emit('chat message', msg);
         });
 
