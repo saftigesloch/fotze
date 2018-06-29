@@ -17,12 +17,13 @@ function handler(req, res) {
     });
 }
 
+var clients = 0;
 
 io.on('connection', function (socket) {
 
             
 
-
+        clients++;
         console.log("--# client connected !26:", new Date());
         io.emit('event message', " client connected !27: " + new Date());
         
@@ -35,10 +36,19 @@ io.on('connection', function (socket) {
             console.log(" !35 # dev. --> " + msg);
         });
 
+        
+
         socket.on('cunt', function(username) {
             socket.username = username;
             
             });
+
+        socket.on('action', function (data) {
+            io.emit('action', data);
+            io.emit('notify message', socket.username + " sent vibrations");
+            console.log('notify message', data, socket.username + " sent vibrations");
+        });
+
 
         socket.on('chat message', function (msg) {
             console.log(socket.username + ' ->: ' + msg);
@@ -52,6 +62,7 @@ io.on('connection', function (socket) {
         });
 
         socket.on('disconnect', function () {
+            clients--;
             console.log("--# client disconnected !54:", new Date());
             io.emit('event message', "client disconnected: " + new Date());
             io.emit('notify message', "User " + socket.username + " disconnected");
@@ -62,4 +73,4 @@ io.on('connection', function (socket) {
 
 
 
-// 06/25/18
+// 06/29/18
